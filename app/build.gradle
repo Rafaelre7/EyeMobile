@@ -37,5 +37,7 @@ dependencies {
     // spring physics animation dependency
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 
+    implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
+
 
 }

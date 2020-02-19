@@ -12,10 +12,10 @@
         android:id="@+id/tvTotalPagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="@string/valor_total"
         android:textColor="@android:color/white"
-        android:textSize="50sp"
+        android:textSize="64sp"
         app:fontFamily="@font/din_condensed_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -263,7 +263,17 @@
 
     </androidx.cardview.widget.CardView>
 
-
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="29dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="R$"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTotal"
+        app:layout_constraintEnd_toStartOf="@+id/tvTotalPagar"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

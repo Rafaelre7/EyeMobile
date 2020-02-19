@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
+
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import java.text.DecimalFormat;
 
@@ -22,7 +24,6 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
     private ImageButton btnBackSpace;
     private TextView tvTotalPagar;
-    DecimalFormat df = new DecimalFormat("#,##");
     private ViewPager viewPager;
     private LinearLayout dotLayout;
     private SliderAdapter sliderAdapter;
@@ -57,6 +58,18 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
 
         viewPager.addOnPageChangeListener(viewListener);
 
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NN,NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(tvTotalPagar, smf);
+        tvTotalPagar.addTextChangedListener(mtw);
+
+        btnBackSpace.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                tvTotalPagar.setText("00,00");
+                return true;
+            }
+        });
+
     }
 
 
@@ -81,21 +94,24 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View view) {
         String texto = tvTotalPagar.getText().toString();
+        if (texto.contains("0,00") && texto.contains("00,00")) {
+            tvTotalPagar.setText("");
+        }
         switch (view.getId()) {
+
             case R.id.btnBackSpace:
 
-                if (!texto.isEmpty()) {
+                if (!texto.isEmpty() && !texto.equals("0,00")) {
                     texto = texto.substring(0, texto.length() - 1);
                 }
                 tvTotalPagar.setText(texto);
-
-//                tvTotalPagar.setText(String.format("$%.2f"+texto));
 
                 break;
             case R.id.btn0:
                 tvTotalPagar.append("0");
                 break;
             case R.id.btn1:
+
                 tvTotalPagar.append("1");
                 break;
             case R.id.btn2:
@@ -152,8 +168,8 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
 
         }
 
-        if ( mDots.length > 0){
-           mDots[position].setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        if (mDots.length > 0) {
+            mDots[position].setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }
     }
 
@@ -173,4 +189,5 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
 
         }
     };
+
 }
