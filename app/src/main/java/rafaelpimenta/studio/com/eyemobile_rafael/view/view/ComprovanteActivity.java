@@ -13,7 +13,8 @@ public class ComprovanteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comprovante);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);//mostrar o icone e não o titulo
+        getSupportActionBar().setTitle("PAGAMENTO REALIZADO COM SUCESSO");
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);//mostrar o icone e não o titulo
 
     }
 }

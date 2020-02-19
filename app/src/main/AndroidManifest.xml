@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.view.ComprovanteActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".view.view.FormaPagamentoActivity"></activity>
         <activity android:name=".view.view.FormaPagamentoActivity"
             android:screenOrientation="portrait">
             <intent-filter>

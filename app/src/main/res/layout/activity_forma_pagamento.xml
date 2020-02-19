@@ -242,7 +242,7 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerSlider"
                 android:layout_width="match_parent"
-                android:layout_height="129dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -252,9 +252,10 @@
             <LinearLayout
                 android:id="@+id/dotslayout"
                 android:layout_width="match_parent"
-                android:layout_height="69dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:gravity="center"
                 android:orientation="horizontal"></LinearLayout>
 
 

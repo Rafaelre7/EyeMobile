@@ -34,7 +34,8 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forma_pagamento);
-
+        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         inicializarComponentes();
         btnBackSpace.setOnClickListener(this);
         btn0.setOnClickListener(this);
@@ -138,7 +139,7 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
     }
 
     public void addDotsIndicator(int position) {
-        mDots = new TextView[3];
+        mDots = new TextView[5];
         dotLayout.removeAllViews();
 
         for (int i = 0; i < mDots.length; i++) {
@@ -152,7 +153,7 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
         }
 
         if (mDots.length > 0){
-           mDots[position].setTextColor(getResources().getColor(R.color.white));
+           mDots[position].setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }
     }
 
