@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_main"
-    tools:context=".view.view.FormaPagamentoActivity">
+    tools:context=".view.view.FormaPagamentoActivity"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/tvTotalPagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/valor_total"
         android:textColor="@android:color/white"
-        android:textSize="76sp"
+        android:textSize="50sp"
         app:fontFamily="@font/din_condensed_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +39,7 @@
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16sp"
         android:layout_weight="1"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
@@ -59,10 +59,8 @@
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_weight="1"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
@@ -79,9 +77,8 @@
         android:id="@+id/btn3"
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_weight="1"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
@@ -220,20 +217,23 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/circle"
         android:src="@drawable/ic_backspace_black_24dp"
+
         app:layout_constraintEnd_toEndOf="@+id/btn9"
         app:layout_constraintStart_toStartOf="@+id/btn9"
         app:layout_constraintTop_toBottomOf="@+id/btn9" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@android:color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn0">
 
         <RelativeLayout
             android:layout_width="match_parent"

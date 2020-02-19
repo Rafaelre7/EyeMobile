@@ -139,7 +139,7 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
     }
 
     public void addDotsIndicator(int position) {
-        mDots = new TextView[5];
+        mDots = new TextView[2];
         dotLayout.removeAllViews();
 
         for (int i = 0; i < mDots.length; i++) {
@@ -152,7 +152,7 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
 
         }
 
-        if (mDots.length > 0){
+        if ( mDots.length > 0){
            mDots[position].setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }
     }
