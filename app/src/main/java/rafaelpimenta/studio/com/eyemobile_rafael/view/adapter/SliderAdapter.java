@@ -1,28 +1,28 @@
 package rafaelpimenta.studio.com.eyemobile_rafael.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import rafaelpimenta.studio.com.eyemobile_rafael.R;
-import rafaelpimenta.studio.com.eyemobile_rafael.view.view.ComprovanteActivity;
+import rafaelpimenta.studio.com.eyemobile_rafael.view.util.Controlador;
 
 public class SliderAdapter extends PagerAdapter implements View.OnClickListener {
 
-    Context context;
-    LayoutInflater layoutInflater;
+    private Context context;
+    private LayoutInflater layoutInflater;
+    private Controlador interfaceKeys;
 
-    public SliderAdapter(Context context) {
+    public SliderAdapter(Context context, Controlador interfaceKeys) {
         this.context = context;
+        this.interfaceKeys = interfaceKeys;
     }
 
     public int[] slide_images = {
@@ -50,30 +50,8 @@ public class SliderAdapter extends PagerAdapter implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.slide_image:
-                Toast.makeText(context, "Clicou: " + slide_headings[0], Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, ComprovanteActivity.class);
-                context.startActivity(intent);
-                break;
 
-            case R.id.slide_image2:
-                Toast.makeText(context, "Clicou: " + slide_headings[1], Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.slide_image3:
-                Toast.makeText(context, "Clicou: " + slide_headings[2], Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.slide_image_sec:
-                Toast.makeText(context, "Clicou: " + slide_headings[3], Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.slide_image_sec2:
-                Toast.makeText(context, "Clicou: " + slide_headings[4], Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-
-
-        }
+        interfaceKeys.clickPagamento(v.getId());
     }
 
     @Override

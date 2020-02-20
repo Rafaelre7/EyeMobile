@@ -5,20 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_main"
-    tools:context=".view.view.FormaPagamentoActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".view.view.FormaPagamentoActivity">
 
     <TextView
         android:id="@+id/tvTotalPagar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
         android:text="@string/valor_total"
         android:textColor="@android:color/white"
         android:textSize="64sp"
         app:fontFamily="@font/din_condensed_bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="@+id/tvTotal"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -96,7 +98,6 @@
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/circle"
         android:text="4"
@@ -111,10 +112,8 @@
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
         android:gravity="center"
@@ -131,7 +130,6 @@
         android:layout_height="@dimen/button_size"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
         android:gravity="center"
@@ -147,7 +145,6 @@
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
@@ -164,10 +161,8 @@
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
         android:gravity="center"
@@ -184,7 +179,6 @@
         android:layout_height="@dimen/button_size"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:background="@drawable/circle"
         android:fontFamily="@font/din_condensed_bold"
         android:gravity="center"
@@ -223,6 +217,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn9" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -265,15 +260,16 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="29dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp"
         android:text="R$"
         android:textColor="@color/white"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTotal"
         app:layout_constraintEnd_toStartOf="@+id/tvTotalPagar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTotalPagar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

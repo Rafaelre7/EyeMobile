@@ -1,5 +1,6 @@
 package rafaelpimenta.studio.com.eyemobile_rafael.view.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -18,8 +20,9 @@ import java.text.DecimalFormat;
 
 import rafaelpimenta.studio.com.eyemobile_rafael.R;
 import rafaelpimenta.studio.com.eyemobile_rafael.view.adapter.SliderAdapter;
+import rafaelpimenta.studio.com.eyemobile_rafael.view.util.Controlador;
 
-public class FormaPagamentoActivity extends AppCompatActivity implements View.OnClickListener {
+public class FormaPagamentoActivity extends AppCompatActivity implements View.OnClickListener, Controlador {
 
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
     private ImageButton btnBackSpace;
@@ -50,7 +53,7 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
         btn8.setOnClickListener(this);
         btn9.setOnClickListener(this);
 
-        sliderAdapter = new SliderAdapter(this);
+        sliderAdapter = new SliderAdapter(this, this);
 
         viewPager.setAdapter(sliderAdapter);
 
@@ -190,4 +193,40 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
         }
     };
 
+    @Override
+    public void clickPagamento(int position) {
+        Intent intent = new Intent(this, ComprovanteActivity.class);
+        switch (position) {
+            case R.id.slide_image:
+                intent.putExtra("valor", tvTotalPagar.getText().toString());
+                intent.putExtra("pagamento", "DINHEIRO");
+                startActivity(intent);
+                break;
+
+            case R.id.slide_image2:
+                intent.putExtra("valor", tvTotalPagar.getText().toString());
+                intent.putExtra("pagamento", "DÉBITO");
+                startActivity(intent);
+                break;
+            case R.id.slide_image3:
+                intent.putExtra("valor", tvTotalPagar.getText().toString());
+                intent.putExtra("pagamento", "CRÉDITO");
+                startActivity(intent);
+                break;
+            case R.id.slide_image_sec:
+                intent.putExtra("valor", tvTotalPagar.getText().toString());
+                intent.putExtra("pagamento", "V.R");
+                startActivity(intent);
+                break;
+            case R.id.slide_image_sec2:
+                intent.putExtra("valor", tvTotalPagar.getText().toString());
+                intent.putExtra("pagamento", "CUPOM");
+                startActivity(intent);
+                break;
+            default:
+                break;
+
+
+        }
+    }
 }
