@@ -17,9 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 repositories {
     mavenCentral()
+}
+
+ext{
+    rxJava_version = "2.2.9"
+    rxAndroid_version = "2.1.1"
 }
 
 dependencies {
@@ -32,12 +41,16 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:1.5.7'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-// viewpager indicator dependency
+    // viewpager indicator dependency
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
     // spring physics animation dependency
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 
     implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxJava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
+
 
 
 }

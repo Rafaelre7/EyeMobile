@@ -1,6 +1,8 @@
 package rafaelpimenta.studio.com.eyemobile_rafael.view.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -229,4 +231,7 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
 
         }
     }
+
+
+
 }
