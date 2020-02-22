@@ -1,5 +1,6 @@
 package rafaelpimenta.studio.com.eyemobile_rafael.view.view;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -81,6 +82,8 @@ public class ComprovanteActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.btnConfirmar:
                 finish();
+                Intent intent = new Intent(this, FormaPagamentoActivity.class);
+                startActivity(intent);
                 break;
         }
 
