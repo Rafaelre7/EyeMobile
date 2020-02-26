@@ -17,6 +17,7 @@
         android:focusable="false"
         android:inputType=""
         android:linksClickable="false"
+        android:maxLength="10"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/transparent"
         android:textSize="64sp"
