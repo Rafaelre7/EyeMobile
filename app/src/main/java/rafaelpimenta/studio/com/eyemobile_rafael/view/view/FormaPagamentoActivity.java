@@ -70,6 +70,15 @@ public class FormaPagamentoActivity extends AppCompatActivity implements Control
         tvTotalPagar.setText(Helper.retornaMoeda(0));
     }
 
+    @OnClick(R.id.btnBackSpace)
+    void apagar() {
+        String texto = tvTotalPagar.getText().toString().trim();
+        if (!texto.isEmpty() && !texto.contains("$0.00")) {
+            texto = texto.substring(0, texto.length() - 1);
+            tvTotalPagar.setText(texto);
+        }
+    }
+
     @OnClick({R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9})
     void buttonClick(Button button) {
         String texto = tvTotalPagar.getText().toString().trim();
@@ -80,14 +89,6 @@ public class FormaPagamentoActivity extends AppCompatActivity implements Control
 
         switch (button.getId()) {
 
-            case R.id.btnBackSpace:
-
-                if (!texto.isEmpty() && !texto.contains("$0.00")) {
-                    texto = texto.substring(0, texto.length() - 1);
-                    tvTotalPagar.setText(texto);
-                }
-
-                break;
             case R.id.btn0:
                 tvTotalPagar.append("0");
                 break;
