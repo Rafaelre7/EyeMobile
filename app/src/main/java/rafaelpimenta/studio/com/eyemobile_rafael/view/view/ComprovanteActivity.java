@@ -1,5 +1,6 @@
 package rafaelpimenta.studio.com.eyemobile_rafael.view.view;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,22 +15,32 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import java.util.concurrent.TimeUnit;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import rafaelpimenta.studio.com.eyemobile_rafael.R;
 import rafaelpimenta.studio.com.eyemobile_rafael.view.util.Helper;
 
-public class ComprovanteActivity extends AppCompatActivity implements View.OnClickListener {
+public class ComprovanteActivity extends AppCompatActivity {
 
     private Bundle dados;
-    private Button btnConfirmar;
-    private ImageView imgRecibo;
-    private TextView tvDataHr, tvFormaPag, tvValor, tvTitulo;
+    @BindView(R.id.imgRecibo)
+    ImageView imgRecibo;
+    @BindView(R.id.tvDataHr)
+    TextView tvDataHr;
+    @BindView(R.id.tvPagamento)
+    TextView tvFormaPag;
+    @BindView(R.id.tvValor)
+    TextView tvValor;
+    @BindView(R.id.tvTitulo)
+    TextView tvTitulo;
+    private AlertDialog dialog;
+
     private ConstraintLayout constraintLayout;
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
@@ -39,12 +50,11 @@ public class ComprovanteActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comprovante);
 
+        ButterKnife.bind(this);
         inicializaComponentes();
 
         dados = getIntent().getExtras();
         getSupportActionBar().setTitle("PAGAMENTO REALIZADO COM SUCESSO");
-        btnConfirmar.setOnClickListener(this);
-
 
         createCupom();
     }
@@ -54,17 +64,18 @@ public class ComprovanteActivity extends AppCompatActivity implements View.OnCli
         tvFormaPag.setText(dados.getString("pagamento"));
         tvDataHr.setText(Helper.retornarData());
 
+        dialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Gerando Comprovante")
+                .setCancelable(false)
+                .build();
+        dialog.show();
+
         createBitmap();
     }
 
     private void inicializaComponentes() {
-        btnConfirmar = findViewById(R.id.btnConfirmar);
         constraintLayout = findViewById(R.id.contraintComprovante);
-        imgRecibo = findViewById(R.id.imgRecibo);
-        tvTitulo = findViewById(R.id.tvTitulo);
-        tvFormaPag = findViewById(R.id.tvPagamento);
-        tvValor = findViewById(R.id.tvValor);
-        tvDataHr = findViewById(R.id.tvDataHr);
     }
 
     public void createBitmap() {
@@ -77,22 +88,18 @@ public class ComprovanteActivity extends AppCompatActivity implements View.OnCli
                 ));
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnConfirmar:
-                finish();
-                Intent intent = new Intent(this, FormaPagamentoActivity.class);
-                startActivity(intent);
-                break;
-        }
-
+    @OnClick(R.id.btnConfirmar)
+    void onClick() {
+        finish();
+        Intent intent = new Intent(this, FormaPagamentoActivity.class);
+        startActivity(intent);
     }
 
-    public static Observable<Bitmap> getBitmap(View view) {
+
+    public Observable<Bitmap> getBitmap(View view) {
         return Observable.create(emitter -> {
 
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(returnedBitmap);
             Drawable bgDrawable = view.getBackground();
@@ -102,10 +109,15 @@ public class ComprovanteActivity extends AppCompatActivity implements View.OnCli
                 canvas.drawColor(Color.WHITE);
             view.draw(canvas);
 
-
+            dialog.dismiss();
             emitter.onNext(returnedBitmap);
             emitter.onComplete();
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCompositeDisposable.clear();
+    }
 }

@@ -4,39 +4,42 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import dmax.dialog.SpotsDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import android.app.AlertDialog;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnLongClick;
 import rafaelpimenta.studio.com.eyemobile_rafael.R;
 import rafaelpimenta.studio.com.eyemobile_rafael.view.adapter.SliderAdapter;
 import rafaelpimenta.studio.com.eyemobile_rafael.view.util.Controlador;
 import rafaelpimenta.studio.com.eyemobile_rafael.view.util.Helper;
 import rafaelpimenta.studio.com.eyemobile_rafael.view.util.Mask;
 
-public class FormaPagamentoActivity extends AppCompatActivity implements View.OnClickListener, Controlador {
+public class FormaPagamentoActivity extends AppCompatActivity implements Controlador {
 
-    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
-    private ImageButton btnBackSpace;
-    private EditText tvTotalPagar;
-    private ViewPager viewPager;
-    private LinearLayout dotLayout;
+    @BindView(R.id.tvTotalPagar)
+    EditText tvTotalPagar;
+    @BindView(R.id.viewPagerSlider)
+    ViewPager viewPager;
+    @BindView(R.id.dotslayout)
+    LinearLayout dotLayout;
+    private AlertDialog dialog;
+
     private SliderAdapter sliderAdapter;
     private TextView[] mDots;
-    String valor;
-    String valorClean;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +48,7 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
         //Actionbar
         getSupportActionBar().hide();
 
-        inicializarComponentes();
-        btnBackSpace.setOnClickListener(this);
-        btn0.setOnClickListener(this);
-        btn1.setOnClickListener(this);
-        btn2.setOnClickListener(this);
-        btn3.setOnClickListener(this);
-        btn4.setOnClickListener(this);
-        btn5.setOnClickListener(this);
-        btn6.setOnClickListener(this);
-        btn7.setOnClickListener(this);
-        btn8.setOnClickListener(this);
-        btn9.setOnClickListener(this);
+        ButterKnife.bind(this);
 
         //Inicializando viewPager
         sliderAdapter = new SliderAdapter(this, this);
@@ -64,50 +56,29 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
         addDotsIndicator(0);
         viewPager.addOnPageChangeListener(viewListener);
 
-        TextWatcher valorMask = Mask.monetario((EditText) tvTotalPagar);
+        TextWatcher valorMask = Mask.monetario(tvTotalPagar);
         tvTotalPagar.addTextChangedListener(valorMask);
 
-//        SimpleMaskFormatter smf = new SimpleMaskFormatter("NN,NN");
-//        MaskTextWatcher mtw = new MaskTextWatcher(tvTotalPagar, smf);
-//        tvTotalPagar.addTextChangedListener(mtw);
 
-        //Evento de longo click no botao de apagar
-        btnBackSpace.setOnLongClickListener(v -> {
-            tvTotalPagar.setText(Helper.retornaMoeda(0));
-            return true;
-        });
         tvTotalPagar.setText(Helper.retornaMoeda(0));
         tvTotalPagar.setBackgroundColor(Color.TRANSPARENT);
 
     }
 
-
-    private void inicializarComponentes() {
-        btn1 = findViewById(R.id.btn1);
-        btn2 = findViewById(R.id.btn2);
-        btn3 = findViewById(R.id.btn3);
-        btn4 = findViewById(R.id.btn4);
-        btn5 = findViewById(R.id.btn5);
-        btn6 = findViewById(R.id.btn6);
-        btn7 = findViewById(R.id.btn7);
-        btn8 = findViewById(R.id.btn8);
-        btn9 = findViewById(R.id.btn9);
-        btn0 = findViewById(R.id.btn0);
-        tvTotalPagar = findViewById(R.id.tvTotalPagar);
-        btnBackSpace = findViewById(R.id.btnBackSpace);
-        viewPager = findViewById(R.id.viewPagerSlider);
-        dotLayout = findViewById(R.id.dotslayout);
+    @OnLongClick(R.id.btnBackSpace)
+    void onLongClick() {
+        tvTotalPagar.setText(Helper.retornaMoeda(0));
     }
 
-
-    @Override
-    public void onClick(View view) {
+    @OnClick({R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9})
+    void buttonClick(Button button) {
         String texto = tvTotalPagar.getText().toString().trim();
 
         if (texto.contains("$0.00")) {
             tvTotalPagar.setText("");
         }
-        switch (view.getId()) {
+
+        switch (button.getId()) {
 
             case R.id.btnBackSpace:
 
@@ -154,16 +125,6 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
         }
     }
 
-    public String formatString(String s) {
-        String givenstring = s;
-        Long longval;
-
-        longval = Long.parseLong(givenstring);
-        DecimalFormat formatter = new DecimalFormat("#,###,##0.00");
-        String formattedString = formatter.format(longval);
-        return formattedString;
-    }
-
     public void addDotsIndicator(int position) {
         mDots = new TextView[2];
         dotLayout.removeAllViews();
@@ -205,7 +166,6 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
         Intent intent = new Intent(this, ComprovanteActivity.class);
         switch (position) {
             case R.id.slide_image:
-                finish();
                 intent.putExtra("valor", tvTotalPagar.getText().toString());
                 intent.putExtra("pagamento", "DINHEIRO");
                 startActivity(intent);
@@ -241,6 +201,4 @@ public class FormaPagamentoActivity extends AppCompatActivity implements View.On
 
         }
     }
-
-
 }
